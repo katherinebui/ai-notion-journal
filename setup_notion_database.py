@@ -10,6 +10,7 @@ def create_journal_database():
 	if not parent_page_id:
 		raise RuntimeError("Set NOTION_PAGE_ID in your .env to auto-create the DB.")
 	properties = {
+		"Title": { "title": {} },
 		"Date": { "date": {} },
 		"Mood": { "select": { "options": [
 			{"name": "Happy", "color": "green"},
