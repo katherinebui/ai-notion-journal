@@ -1,0 +1,7 @@
+.venv/
+.env
+__pycache__/
+*.pyc
+.DS_Store
+mood_health_trends.png
+wellness_report.txt
