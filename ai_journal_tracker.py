@@ -61,6 +61,9 @@ class AIJournalTracker:
 				return None
 			entry_date = datetime.fromisoformat(date_prop['start'].replace('Z', '+00:00'))
 
+			title_prop = properties.get('Title', {}).get('title', [])
+			title = ' '.join([t['plain_text'] for t in title_prop]) if title_prop else ''
+
 			mood_prop = properties.get('Mood', {}).get('select')
 			mood = mood_prop['name'] if mood_prop else 'Neutral'
 
@@ -75,6 +78,7 @@ class AIJournalTracker:
 
 			return {
 				'date': entry_date,
+				'title': title,
 				'mood': mood,
 				'health': health,
 				'activities': activities,
@@ -116,6 +120,8 @@ class AIJournalTracker:
 		lines = ["Analyze these journal entries and provide insights:\n"]
 		for e in entries:
 			lines.append(f"Date: {e['date'].strftime('%Y-%m-%d')}")
+			if e.get('title'):
+				lines.append(f"Title: {e['title']}")
 			lines.append(f"Mood: {e['mood']}")
 			lines.append(f"Health: {e['health']}")
 			lines.append(f"Activities: {e['activities']}")

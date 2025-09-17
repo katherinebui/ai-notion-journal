@@ -14,6 +14,7 @@ class JournalEntryAdder:
 
 	def add_entry(self):
 		print("Add Journal Entry")
+		title = input("Title: ").strip() or f"Journal Entry - {datetime.now().strftime('%Y-%m-%d')}"
 		date_str = input(f"Date (YYYY-MM-DD) [default {datetime.now().strftime('%Y-%m-%d')}]: ").strip() or datetime.now().strftime('%Y-%m-%d')
 		print("Mood options:", ", ".join(self.mood_options))
 		mood = input("Mood: ").strip() or "Neutral"
@@ -27,6 +28,7 @@ class JournalEntryAdder:
 		notes = input("Notes: ").strip()
 
 		props = {
+			"Title": {"title": [{"text": {"content": title}}]},
 			"Date": {"date": {"start": date_str}},
 			"Mood": {"select": {"name": mood}},
 			"Health Status": {"select": {"name": health}},
